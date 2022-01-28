@@ -1,1 +1,1 @@
-​
+https://leetcode.com/problems/can-place-flowers/discuss/103933/simplest-c%2B%2B-code
