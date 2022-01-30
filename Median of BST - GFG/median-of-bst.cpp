@@ -122,11 +122,12 @@ struct Node {
 // your task is to complete the Function
 // Function should return median of the BST
 void insert(struct Node* root, vector<int>&v){
+    
     if(!root)
        return ;
     
-    v.push_back(root->data);
     insert(root->left, v);
+    v.push_back(root->data);
     insert(root->right, v);
     
 }
@@ -138,7 +139,7 @@ float findMedian(struct Node *root)
         
       vector<int>v;
       insert(root, v);
-      sort(v.begin(), v.end());
+      
       int n=v.size();
       if(n%2==0){
           return (v[n/2-1]+v[n/2])/2.0;
