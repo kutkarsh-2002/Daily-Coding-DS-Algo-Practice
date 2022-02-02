@@ -138,17 +138,15 @@ void leafNode(Node* root, vector<int>&v){
     if(root==NULL)
         return ;
     
-   else if(root->left==NULL && root->right==NULL){
+   if(root->left==NULL && root->right==NULL){
        v.push_back(root->data);
         return ;
    }
         
     
+    leafNode(root->left, v);
+    leafNode(root->right, v);
     
-    else {
-        leafNode(root->left, v);
-        leafNode(root->right, v);
-    }
     
 }
 
