@@ -21,6 +21,7 @@ public:
     }
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
         
+        sum=0;
         find(candidates, target, 0);
         
         return res;
