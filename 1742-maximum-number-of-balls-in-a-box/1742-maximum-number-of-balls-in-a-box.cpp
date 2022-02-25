@@ -14,11 +14,9 @@ public:
         
         unordered_map<int, int>mp;
         
-        int n=highLimit - lowLimit+1;
-        
         for(int i=lowLimit; i<=highLimit; i++){
-            int boxNumber=SumofDigit(i);
-            mp[boxNumber]++;
+           
+            mp[SumofDigit(i)]++;
         }
         
         int freq=0;
