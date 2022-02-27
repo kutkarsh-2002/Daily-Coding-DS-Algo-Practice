@@ -12,70 +12,45 @@
 class Solution {
 public:
     int widthOfBinaryTree(TreeNode* root) {
-        /*
-        //This code is unable to handle the situation where we need to include null node in maximun width for every test acses
-        
-        if(root==NULL){
+        if(root == NULL)
             return 0;
-        }
-        queue<TreeNode*>q;
-        q.push(root);
-        q.push(NULL);
-        int maximum=0;
-        int count=0;
-        int prev=0;
-        while(!q.empty()){
-            TreeNode* curr=q.front();
-            q.pop();
-            if(curr==NULL){
-                maximum=max(maximum, count);
-                count=0;
-                count+=prev;
-                prev=0;
-                if(q.size()>0){
-                    q.push(NULL);
-                }
-            }else{
-                count++;
-                if(curr->left!=NULL){
-                    q.push(curr->left);
-                }
-                if(curr->right!=NULL){
-                    q.push(curr->right);
-                }
-                if(curr->left==NULL && curr->right!=NULL){
-                    prev++;
-                }
-                if(curr->left!=NULL && curr->right==NULL){
-                    prev++;
-                }
+        
+        int res = 1;
+        queue<pair<TreeNode*, int>> q;
+        
+        // I am using intialising list
+        q.push({root, 0});      // also can use make_pair
+        
+        while(!q.empty())
+        {
+            int cnt = q.size();
+            // start is the index of root node for first level
+            int start = q.front().second;
+            int end = q.back().second;
+            
+            res = max(res,end-start + 1);
+            
+            for(int i = 0; i <cnt; ++i)
+            {
+                pair<TreeNode*, int> p = q.front();
+                // we will use it while inserting it children
+                // left child will be 2 * idx + 1;
+                // right chils will be 2 * idx + 2;
+                int idx = p.second - start;
                 
+                q.pop();
+                
+                // if  left child exist
+                if(p.first->left != NULL)
+                    q.push({p.first->left, (long long)2 * idx + 1});
+                
+                // if right child exist
+                if(p.first->right != NULL)
+                    q.push({p.first->right, (long long) 2 * idx + 2});
             }
         }
         
-        return maximum;*/
-        
-        if (!root)return 0;
-        queue<pair<TreeNode*, unsigned long long int>> que;
-        que.push({root, 0});
-        int width = 0;
-        while (que.size() != 0) {
-            unsigned long long int left = que.front().second, right = 0;
-            int size = que.size();
-            while (size-- > 0) {
-                pair<TreeNode*, unsigned long long int> rNode = que.front();
-                que.pop();
-                right = rNode.second;
-                if (rNode.first->left) {
-                    que.push({rNode.first->left, 2 * rNode.second + 1});
-                }
-                if (rNode.first->right) {
-                    que.push({rNode.first->right, 2 * rNode.second + 2});
-                }
-            }
-            width = max(width, int(right - left + 1));
-        }
-        return width;
+        return res;
         
     }
 };
