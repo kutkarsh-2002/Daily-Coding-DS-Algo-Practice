@@ -35,7 +35,10 @@ public:
         
         for (auto iter = ansMap.begin(); iter != ansMap.end(); iter++) {
             for (auto i = 0; i < ansMap[iter->first]; ++i) {
-                res.push_back(string(1, iter->first));
+                //res.push_back(string(1, iter->first));
+                string temp="";
+                temp+=iter->first;
+                res.push_back(temp);
             }
         }
            
