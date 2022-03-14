@@ -72,6 +72,7 @@ public:
         else // also taking care of this care when (/..someFileName or /...someFileName) this is a valid file.
             stk.push(tmpPath);
     }
+        
     string ans="";
     while(!stk.empty()){
         ans="/"+stk.top()+ans; // inserting in the begining.
