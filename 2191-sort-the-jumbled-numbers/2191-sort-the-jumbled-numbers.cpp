@@ -16,7 +16,7 @@ public:
             power *= 10;
             x/=10;
         }
-    cout<<ans<<endl;
+    //cout<<ans<<endl;
         return ans;
     }
     
