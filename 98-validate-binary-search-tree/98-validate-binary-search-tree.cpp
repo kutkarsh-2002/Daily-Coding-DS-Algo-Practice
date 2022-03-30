@@ -20,6 +20,7 @@ public:
         
         return validation(root->left, min_val, root->val) && validation(root->right, root->val, max_val);
     }
+    
     bool isValidBST(TreeNode* root) {
         if(!root)
             return true;
