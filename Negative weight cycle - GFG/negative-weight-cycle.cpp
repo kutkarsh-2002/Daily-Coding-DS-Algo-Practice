@@ -5,19 +5,21 @@ using namespace std;
  // } Driver Code Ends
 class Solution {
 public:
-/*struct node{
+struct node{
     int u, v, wt;
     node(int first, int second, int weight){
         u=first;
         v=second;
         wt=weight;
     }
-};*/
+};
 
 	int isNegativeWeightCycle(int n, vector<vector<int>>edges){
 	    
-	    /*vector<node>v;
-	    vector<int>dis(n, INT_MAX);
+	    int dis[n];
+	    memset(dis,INT_MAX,sizeof(dis));
+	    dis[0]=0;
+	    vector<node>v;
 	    
 	    for(int i=0; i<edges.size(); i++){
 	        v.push_back(node(edges[i][0], edges[i][1], edges[i][2]));
@@ -39,9 +41,9 @@ public:
 	            }
 	    }
 	    
-	    return 0;*/
+	    return 0;
 	    
-	    int dis[n];
+	    /*int dis[n];
 	    memset(dis,INT_MAX,sizeof(dis));
 	    dis[0]=0;
 	    
@@ -63,7 +65,7 @@ public:
 	                return 1;
 	            }
 	        }
-	    return 0;
+	    return 0;*/
 	}
 };
 
