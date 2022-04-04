@@ -5,8 +5,7 @@ class Solution {
 public:
     int firstBadVersion(int n) {
         long long i=1, j=n, mid=0, ans=0;
-        bool flag=false;
-        //mid=(i+j)/2;
+        
         while(i<=j){
             mid=(i+j)/2;
             if(isBadVersion(mid)==false){
