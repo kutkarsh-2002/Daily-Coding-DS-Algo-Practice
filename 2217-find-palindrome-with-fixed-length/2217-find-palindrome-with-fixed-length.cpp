@@ -1,86 +1,81 @@
 class Solution {
 public:
     
-    
-   /* bool isPalindrome(int n)
-    {
-        int rev = 0;
-        for (int i = n; i > 0; i /= 10)
-            rev = rev*10 + i%10;
-
-
-        return (n==rev);
-    }
-    
-    int Firstmin(int Length){
-        if(Length==1){
-            return 1;
-        }
-        else{
-            return pow(10, Length - 1) + 1;
-        }
-        
-    }
-    
     vector<long long> kthPalindrome(vector<int>& queries, int intLength) {
         
-        unordered_map<int, vector<int>>mp;
-        vector<long long>res(queries.size(), 0);
+        vector<long long>res;
+        int k=intLength;
+        long long Cpalk;
         
-        int count=0;
-        int initial=Firstmin(intLength);
+        //count total number of possible palindrome of kth digits
+        long long p=(k&1)?((k+1)/2-1):(k/2-1);
+        Cpalk=(long long)pow(10LL, p)*9;
         
-        for(int i=initial; i<=pow(10,intLength)-1; i++){
-            if(isPalindrome(i)){
-                count++;
-            }
-        }
         
         for(int i=0; i<queries.size(); i++){
             
-            if(queries[i]>count){
-                res[i]=-1;
+            //If value of queries is greater than possible number of palindrome of kth digit push_back -1
+            
+            if(Cpalk<queries[i]){
+                res.push_back(-1);
+            }
+            else{
                 
-            }
-        
-            mp[queries[i]].push_back(i);
-            
-        }
-        
-        
-        count=0;
-        
-        for(int i=initial; i<=pow(10,intLength)-1; i++){
-            
-            if(isPalindrome(i)){
-                count++;
-            }
-            
-            if(isPalindrome(i) && mp.find(count)!=mp.end()){
-                for(auto x:mp[count]){
-                    res[x]=i;
+                int n=queries[i];
+                
+                // We can easily write the above sequence for nth
+//                 palindrome as: (n-1) + 1000
+//                 For k digit number, we can generalize above formula as:
+
+//                 If k is odd
+//                 => num = (n-1) + 10k/2
+//                 else 
+//                 => num = (n-1) + 10k/2 - 1 
+
+//                 Now rest half digits can be expanded by just 
+//                 printing the value of num in reverse order. 
+//                 But before this if k is odd then we have to truncate 
+//                 the last digit of a value num 
+                    
+                    
+                long long temp = (k & 1) ? (k / 2) : (k/2 - 1);
+                long long num= (long long)pow(10LL, temp);
+                num += n - 1;
+                
+                
+                string ans="";
+                
+                if(k&1){
+                    if(num<10){
+                        res.push_back(num);
+                        continue;
+                    }
+                    
+                    int t=num%10;
+                    num=num/10;
+                    
+                    ans+=to_string(num);
+                    string temp=ans;
+                    ans+=to_string(t);
+                    
+                    reverse(temp.begin(), temp.end());
+                    ans+=temp;
+                    
+                    res.push_back(stoll(ans));
+                    
+                }else{
+                    ans+=to_string(num);
+                    string temp=ans;
+                    reverse(temp.begin(), temp.end());
+                    ans+=temp;
+                    
+                    res.push_back(stoll(ans));
+                    
                 }
                 
             }
         }
         
         return res;
-        
-    }*/
-    
-    int reverse(long long n, bool skip) {
-    long long res = 0;
-    for (n = skip ? n / 10 : n; n > 0; n /= 10)
-        res = res * 10 + n % 10;
-    return res;
-}
-    
-vector<long long> kthPalindrome(vector<int>& queries, int sz) {
-    vector<long long> res;
-    long long start = pow(10, (sz + 1) / 2 - 1), end = pow(10, (sz + 1 ) / 2), mul = pow(10, sz / 2);    
-    for (int q : queries)
-        res.push_back(start + q > end ? -1 : 
-            (start + q - 1) * mul + reverse(start + q - 1, sz % 2));
-    return res;
-}
+    }
 };
