@@ -1,7 +1,7 @@
 class Solution {
 public:
     int rob(vector<int>& nums) {
-        if(nums.size()==0){
+        /*if(nums.size()==0){
             return 0;
         }
         if(nums.size()==1){
@@ -23,6 +23,22 @@ public:
             dp[i]=max(max(dp[i-2], dp[i-3])+nums[i], dp[i-1]);
         }
         
-        return max(dp[n-1], dp[n-2]);
+        return max(dp[n-1], dp[n-2]);*/
+        
+        int n=nums.size();
+        
+        int dp[n];
+        
+        dp[0]=nums[0];
+        
+        for(int i=1; i<n; i++){
+            if(i-2>=0){
+                dp[i]=max(dp[i-2]+nums[i], dp[i-1]);
+            }else{
+                dp[i]=max(nums[i], dp[i-1]);
+            }
+        }
+        
+        return dp[n-1];
     }
 };
