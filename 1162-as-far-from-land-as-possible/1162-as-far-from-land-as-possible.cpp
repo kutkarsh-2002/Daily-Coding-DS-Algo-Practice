@@ -4,7 +4,6 @@ vector<pair<int,int>>v={{1,0},{0,1},{-1,0},{0,-1}};
     
 int maxDistance(vector<vector<int>>& grid) {
 
-    int count=0;
     int n=grid.size();
     int m=grid[0].size();
     int g=0,c=0;
@@ -16,16 +15,14 @@ int maxDistance(vector<vector<int>>& grid) {
                 q.push({{i,j},0});
                 c++;
             }
-            else{
-                count++;
-            }
         }
     }
+    
     if(c==n*m || c==0){
         return -1;
     }
     
-    int res=0;
+    //int res=0;
     
     while(!q.empty()){
             pair<pair<int,int>,int> x=q.front();
@@ -45,8 +42,6 @@ int maxDistance(vector<vector<int>>& grid) {
         g=x.second;
     }
     
-    // if(count==n*m){
-    //     return -1;}
     
     return g;
 }
