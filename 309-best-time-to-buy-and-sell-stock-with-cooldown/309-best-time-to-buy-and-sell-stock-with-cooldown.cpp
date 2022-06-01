@@ -20,8 +20,8 @@ public:
         // return maxprofit(0, 1, n, prices, dp);
         
         int n=prices.size();
-        vector<vector<int>>dp(n+2, vector<int>(2, -1));
-        dp[n][0]=0, dp[n][1]=0, dp[n+1][0]=0, dp[n+1][1]=0;
+        vector<vector<int>>dp(n+2, vector<int>(2, 0));
+        //dp[n][0]=0, dp[n][1]=0, dp[n+1][0]=0, dp[n+1][1]=0;
 
         for(int i=n-1; i>=0; i--){
 
