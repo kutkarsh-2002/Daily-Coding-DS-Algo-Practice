@@ -7,37 +7,35 @@ class Solution {
   public:
     // Function to detect cycle in an undirected graph.
     
-    bool dfs(int s, vector<int> adj[], bool visited[], int parent){
+    bool cycledet(int u, vector<int>&vis, vector<int>adj[]){
+        queue<pair<int, int>>q;
+        q.push({u, -1});
+        vis[u]=1;
         
-        visited[s]=true;
-        
-        for(int x:adj[s]){
-            if(visited[x]==false){
-                if(dfs(x, adj, visited, s)==true){
-                return true;
-            }
-            }
-            else if(x!=parent){
-                return true;
-            }
-        }
-        
-        return false;
-    }
-    bool isCycle(int V, vector<int> adj[]) {
-        // Code here
-        bool visited[V];
-        
-        for(int i=0; i<V; i++){
-            visited[i]=false;
-        }
-        
-        for(int i=0; i<V; i++){
-            if(visited[i]==false){
-                if(dfs(i, adj, visited, -1)==true)
-                {
+        while(!q.empty()){
+            pair<int, int> node=q.front();
+            q.pop();
+            
+            for(auto x: adj[node.first]){
+                if(vis[x]==1 && x!=node.second){
                     return true;
                 }
+                else if(vis[x]!=1){
+                    q.push({x, node.first});
+                    vis[x]=1;
+                }
+            }
+        }
+        return false;
+    }
+    
+    bool isCycle(int V, vector<int> adj[]) {
+     
+        vector<int>vis(V, 0);
+        
+        for(int i=0; i<V; i++){
+            if(vis[i]!=1){
+                if(cycledet(i, vis, adj)) return true;
             }
         }
         
