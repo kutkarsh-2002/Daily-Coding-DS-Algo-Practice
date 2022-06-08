@@ -5,8 +5,34 @@ using namespace std;
  // } Driver Code Ends
 class Solution {
   public:
-    // Function to detect cycle in an undirected graph.
+    /**************USING DFS******************/
     
+    bool cycledet(int u, int p, vector<int>&vis, vector<int>adj[]){
+        vis[u]=1;
+        
+        for(auto x: adj[u]){
+            if(vis[x]==1 && x!=p) return true;
+            else if(vis[x]!=1){
+                if(cycledet(x, u, vis, adj)) return true;
+            }
+        }
+        
+        return false;
+    }
+    bool isCycle(int V, vector<int> adj[]){
+        vector<int>vis(V, 0);
+        
+        for(int i=0; i<V; i++){
+            if(vis[i]!=1){
+                if(cycledet(i, -1, vis, adj)) return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    /***************USING BFS*****************/
+    /*
     bool cycledet(int u, vector<int>&vis, vector<int>adj[]){
         queue<pair<int, int>>q;
         q.push({u, -1});
@@ -40,7 +66,7 @@ class Solution {
         }
         
         return false;
-    }
+    }*/
 };
 
 // { Driver Code Starts.
