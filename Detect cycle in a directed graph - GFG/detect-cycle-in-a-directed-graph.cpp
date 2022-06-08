@@ -7,46 +7,34 @@ class Solution {
   public:
     // Function to detect cycle in a directed graph.
     
-    bool dfs(int s, vector<int> adj[], bool visited[], bool recst[]){
+    bool isCycle(int u, vector<int>&vis, vector<int>&dfsV, vector<int> adj[]){
+        vis[u]=1;
+        dfsV[u]=1;
         
-        visited[s]=true;
-        recst[s]=true;
+        for(auto x: adj[u]){
+            if(vis[x]==0){
+                if(isCycle(x, vis, dfsV, adj)) return true;
+            }
+            else if(vis[x]==1 && dfsV[x]==1) return true;
         
-        for(int x:adj[s]){
-            if(visited[x]==false && dfs(x, adj, visited, recst)){
-                return true;
-            }
-            else if(recst[x]==true){
-                return true;
-            }
-            
         }
-        recst[s]=false;
         
-        
+         dfsV[u]=0;
+         
         return false;
     }
+    
     bool isCyclic(int V, vector<int> adj[]) {
-        // code here
-        bool visited[V];
-        bool recst[V];
-        
-        
-        for(int i=0; i<V; i++){
-            visited[i]=false;
-            recst[i]=false;
-        }
-        
-        for(int i=0; i<V; i++){
-            if(visited[i]==false){
-                if(dfs(i, adj, visited, recst)==true)
-                {
-                    return true;
-                }
-            }
-        }
-        
-        return false;
+       vector<int>vis(V, 0);
+       vector<int>dfsV(V, 0);
+       
+       for(int i=0; i<V; i++){
+           if(vis[i]==0){
+               if(isCycle(i, vis, dfsV, adj)) return true;
+           }
+       }
+       
+       return false;
     }
 };
 
