@@ -8,39 +8,80 @@ class Solution
 	public:
 	//Function to return list containing vertices in Topological order. 
 	
-	void TopologicalSort(int s, stack<int>&st, vector<bool>&vis, vector<int> adj[]){
+	/*****BFS(Kahn's)******/
+	
+	vector<int> topoSort(int V, vector<int> adj[]){
 	    
-	    vis[s]=true;
+	    //vector<int>vis(V, 0);
+	    vector<int>indg(V, 0);
+	    vector<int>res;
 	    
-	    for(auto x: adj[s]){
-	        if(vis[x]==false){
-	            TopologicalSort(x,st,vis,adj);
+	    // Find the indegree of every node
+	    for(int i=0; i<V; i++){
+	        for(auto x: adj[i]){
+	            indg[x]++;
 	        }
 	    }
 	    
-	    st.push(s);
+	    queue<int>q;
+	    for(int i=0; i<indg.size(); i++){
+	        if(indg[i]==0){
+	            q.push(i);
+	            
+	        }
+	    }
+	    
+	    while(!q.empty()){
+	        int node=q.front();
+	        res.push_back(node);
+	        q.pop();
+	        
+	        for(auto x:adj[node]){
+	            indg[x]-=1;
+	            if(indg[x]==0){
+	                q.push(x);
+	            }
+	        }
+	    
+	} 
+	return res;
 	}
 	
-	vector<int> topoSort(int V, vector<int> adj[]) 
-	{
-	    stack<int>st;
-        vector<bool>vis(V, false);
-        vector<int>res;
+	/*****************DFS*******/
+	
+// 	void TopologicalSort(int s, stack<int>&st, vector<bool>&vis, vector<int> adj[]){
+	    
+// 	    vis[s]=true;
+	    
+// 	    for(auto x: adj[s]){
+// 	        if(vis[x]==false){
+// 	            TopologicalSort(x,st,vis,adj);
+// 	        }
+// 	    }
+	    
+// 	    st.push(s);
+// 	}
+	
+// 	vector<int> topoSort(int V, vector<int> adj[]) 
+// 	{
+// 	    stack<int>st;
+//         vector<bool>vis(V, false);
+//         vector<int>res;
         
-        for(int i=0; i<V; i++){
-            if(vis[i]==false){
-                TopologicalSort(i, st, vis, adj);
-            }
-        }
+//         for(int i=0; i<V; i++){
+//             if(vis[i]==false){
+//                 TopologicalSort(i, st, vis, adj);
+//             }
+//         }
         
-        while(!st.empty()){
-            res.push_back(st.top());
-            st.pop();
-        }
+//         while(!st.empty()){
+//             res.push_back(st.top());
+//             st.pop();
+//         }
         
-        return res;
+//         return res;
         
-	}
+// 	}
 	
 	
 };
