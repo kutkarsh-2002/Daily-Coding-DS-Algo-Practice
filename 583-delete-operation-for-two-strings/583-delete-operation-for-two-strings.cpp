@@ -30,7 +30,6 @@ public:
         int m=word2.size();
         int count=0;
         count=LCS(word1, word2);
-        cout<<count;
         int res=(n-count)+(m-count);
         
         return res;
