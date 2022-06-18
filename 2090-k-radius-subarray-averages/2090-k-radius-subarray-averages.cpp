@@ -35,11 +35,11 @@ public:
             
         }
         
-        if(i+k<nums.size())
-        {
-            res.push_back(nums[i]);
-            i++;
-        }
+//         if(i+k<nums.size())
+//         {
+//             res.push_back(nums[i]);
+//             i++;
+//         }
         
         while(i<nums.size()){
             res.push_back(-1);
