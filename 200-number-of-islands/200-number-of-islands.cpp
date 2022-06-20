@@ -20,6 +20,7 @@ public:
         //For fast I/O 
         ios_base::sync_with_stdio(false);
         cin.tie(NULL);
+        
         int countIsland=0;
         int rows=grid.size();
         int cols=grid[0].size();
