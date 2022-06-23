@@ -4,7 +4,7 @@ public:
         if(i<0 || j<0 || i>=grid.size() || j>=grid[0].size() || grid[i][j]==1)
             return ;
         
-        //vis[i][j]=1;
+        
         grid[i][j]=1;
         
         dfs(i-1, j, grid);
