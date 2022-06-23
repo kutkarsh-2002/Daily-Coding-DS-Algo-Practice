@@ -7,6 +7,7 @@ int maxDistance(vector<vector<int>>& grid) {
     int n=grid.size();
     int m=grid[0].size();
     int g=0,c=0;
+    
     queue<pair<pair<int,int>,int>>q;
     
     for(int i=0;i<n;i++){
@@ -22,9 +23,9 @@ int maxDistance(vector<vector<int>>& grid) {
         return -1;
     }
     
-    //int res=0;
     
     while(!q.empty()){
+        
             pair<pair<int,int>,int> x=q.front();
             q.pop();
         
@@ -32,10 +33,14 @@ int maxDistance(vector<vector<int>>& grid) {
                 
                 int z=v[i].first;
                 int y=v[i].second;
-                if(x.first.first+z>=0&& x.first.first+z<n && x.first.second+y>=0 && x.first.second+y<m &&
-                   grid[x.first.first+z][x.first.second+y]==0){
-               grid[x.first.first+z][x.first.second+y]=1;
+                
+                if(x.first.first+z>=0 && x.first.first+z<n && x.first.second+y>=0 && x.first.second+y<m &&
+                   grid[x.first.first+z][x.first.second+y]==0)
+                {
+                    
+                    grid[x.first.first+z][x.first.second+y]=1;
                     q.push({{x.first.first+z,x.first.second+y},x.second+1});
+                    
                 }
         
     }
