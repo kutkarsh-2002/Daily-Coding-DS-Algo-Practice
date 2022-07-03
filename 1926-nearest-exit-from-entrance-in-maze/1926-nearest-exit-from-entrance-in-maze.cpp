@@ -1,10 +1,10 @@
 class Solution {
 public:
     
-    //vector<int>dir{-1, 0, -1, 0, 1, 0};
+    vector<int>dir{0, -1, 0, 1, 0};
     
-    int dx[4] = {0,-1,0,1};
-    int dy[4] = {-1,0,1,0};
+    // int dx[4] = {0,-1,0,1};
+    // int dy[4] = {-1,0,1,0};
     
     bool validate(int i, int j, vector<vector<int>>&vis, vector<vector<char>>&maze){
         if(i>=0 && j>=0 && i<maze.size() && j<maze[0].size() && maze[i][j]!='+' && vis[i][j]!=1){
@@ -41,7 +41,7 @@ public:
         
             
             for(int i=0; i<4; i++){
-                int nx=x+dx[i], ny=y+dy[i];
+                int nx=x+dir[i], ny=y+dir[i+1];
                 
                 
                 if(validate(nx, ny, vis, maze)){
