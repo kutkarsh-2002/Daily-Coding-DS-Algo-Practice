@@ -1,18 +1,8 @@
-/*class Solution {
-public:
-    bool backspaceCompare(string s, string t) {
-        
-    }
-};*/
-
 class Solution {
 public:
     bool backspaceCompare(string S, string T) {
-            
-         stack <int> s1,s2;
-         string str1,str2; 
-            
-         for(int i = 0; i < S.size(); i++){
+        stack <char> s1,s2;
+        for(int i = 0; i < S.size(); i++){
                  
                  if(S[i] == '#' && !s1.empty())
                          s1.pop();
@@ -31,21 +21,64 @@ public:
                          s2.push(T[i]);
                  
          }
-            
-         while(!s1.empty()){
-                 
-                 str1.push_back(s1.top());
-                 s1.pop();
-                 
-         }
-            
-         while(!s2.empty()){
-                 
-                 str2.push_back(s2.top());
-                 s2.pop();
-                 
-         }      
-            
-         return str1 == str2;   
+        
+        if(s1.size()!=s2.size()) return false;
+        
+        while(!s1.empty() && !s2.empty()){
+            if(s1.top()!=s2.top()) return false;
+            else{
+                s1.pop();
+                s2.pop();
+            }
+        }
+        
+        return true;
+        
     }
 };
+
+// class Solution {
+// public:
+//     bool backspaceCompare(string S, string T) {
+            
+//          stack <int> s1,s2;
+//          string str1,str2; 
+        
+            
+//          for(int i = 0; i < S.size(); i++){
+                 
+//                  if(S[i] == '#' && !s1.empty())
+//                          s1.pop();
+                 
+//                  else if(S[i] != '#')
+//                          s1.push(S[i]);
+                 
+//          }
+         
+//          for(int i = 0; i < T.size(); i++){
+                 
+//                  if(T[i] == '#' && !s2.empty())
+//                          s2.pop();
+                 
+//                  else if(T[i] != '#')
+//                          s2.push(T[i]);
+                 
+//          }
+            
+//          while(!s1.empty()){
+                 
+//                  str1.push_back(s1.top());
+//                  s1.pop();
+                 
+//          }
+            
+//          while(!s2.empty()){
+                 
+//                  str2.push_back(s2.top());
+//                  s2.pop();
+                 
+//          }      
+            
+//          return str1 == str2;   
+//     }
+// };
