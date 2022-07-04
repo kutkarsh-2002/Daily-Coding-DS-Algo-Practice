@@ -6,7 +6,7 @@ public:
         
         string x=s, y=s;
         unordered_map<char, char>mp;
-        unordered_map<char, char>mpt;
+        //unordered_map<char, char>mpt;
         
         
         
@@ -31,23 +31,23 @@ public:
         }
         
         if(y!=t) return false;
-        
+        mp.clear();
         
         for(int i=0; i<s.size(); i++){
-            if(mpt.find(s[i])!=mpt.end() && mpt[s[i]]!=t[i]){
+            if(mp.find(s[i])!=mp.end() && mp[s[i]]!=t[i]){
                 return false;
             }
-            else if((mpt.find(s[i])!=mpt.end() && mpt[s[i]]==t[i])){
+            else if((mp.find(s[i])!=mp.end() && mp[s[i]]==t[i])){
                 string temp="";
                 temp+=t[i];
                 x.replace(i, 1, temp);
                 //cout<<x<<endl;
                 
             }
-            else if(mpt.empty() || mpt.find(s[i])==mpt.end()){
+            else if(mp.empty() || mp.find(s[i])==mp.end()){
                 string temp="";
                 temp+=t[i];
-                mpt.insert({s[i], t[i]});
+                mp.insert({s[i], t[i]});
                 x.replace(i, 1, temp);
                 //cout<<x<<endl;
                 
