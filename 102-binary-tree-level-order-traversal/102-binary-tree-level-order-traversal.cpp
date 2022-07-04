@@ -17,6 +17,7 @@ public:
         if(root==NULL){
             return mat;
         }
+        
         queue<TreeNode*>q;
         q.push(root);
         q.push(NULL);
