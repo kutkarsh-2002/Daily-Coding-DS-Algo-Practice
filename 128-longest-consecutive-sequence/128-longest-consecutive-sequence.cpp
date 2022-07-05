@@ -26,3 +26,46 @@ public:
         return ans;
     }
 };
+
+
+// class Solution {
+// public:
+//     int longestConsecutive(vector<int>& nums) 
+//     {   
+//        if(nums.size()==0) return 0;
+        
+//       set<int>store;
+//      for(int i=0;i<nums.size();i++)
+//      {
+//          store.insert(nums[i]);
+//      }
+      
+        
+//         int longestStreak=1;
+//         for(int i=0;i<nums.size();i++)
+//         {
+          
+//             if(store.count(nums[i]-1)==0)
+//             {
+//                 int currentNum=nums[i]+1;
+//                 int currentStreak=1;
+            
+            
+//                 while(store.count(currentNum))
+//                 {
+//                     currentNum+=1;
+//                     currentStreak+=1;
+//                 }
+            
+//                 longestStreak=max(currentStreak,longestStreak);
+            
+//             }
+            
+            
+//         }
+        
+//         return longestStreak;
+//     }
+    
+    
+// };
