@@ -111,51 +111,94 @@ struct Node{
 /*  Function which returns the  root of 
     the flattened linked list. */
     
-static bool cmp(Node* a, Node* b){
-    return a->data<b->data;
+// static bool cmp(Node* a, Node* b){
+//     return a->data<b->data;
+// }
+
+
+// Node *flatten(Node *root)
+// {
+//   // Your code here
+   
+//   vector<Node*>v;
+//   Node* curr=root;
+   
+//   while(curr!=NULL){
+//       v.push_back(curr);
+//       Node* temp=curr;
+       
+//       if(temp->bottom!=NULL){
+//           temp=temp->bottom;
+//           while(temp!=NULL){
+//               v.push_back(temp);
+//               temp=temp->bottom;
+//           }
+//       }
+       
+//       curr=curr->next;
+//   }
+   
+//   sort(v.begin(), v.end(), cmp);
+//   //cout<<v.size()<<endl;
+   
+//   Node *tail=NULL;
+//   root=NULL;
+   
+//   for(int i=0; i<v.size(); i++){
+//       //Node* temp=new Node(v[i]);
+//       Node* temp=v[i];
+//       if(root==NULL){
+//           root=temp;
+//           tail=root;
+//       }
+//       else{
+//           tail->bottom=temp;
+//           tail=tail->bottom;
+//       }
+//   }
+   
+//   tail->bottom=NULL;
+//   return root;
+
+
+
+// }
+
+Node* merge(Node* a, Node* b){
+    Node* temp=new Node(0);
+    Node* ans=temp;
+    
+    while(a!=NULL && b!=NULL){
+        if(a->data<b->data){
+            temp->bottom=a;
+            
+            a=a->bottom;
+        }else{
+            temp->bottom=b;
+            b=b->bottom;
+        }
+        
+        temp=temp->bottom;
+    }
+    
+    if(a!=NULL){
+        temp->bottom=a;
+    }else{
+        temp->bottom=b;
+    }
+    
+    return ans->bottom;
 }
-Node *flatten(Node *root)
-{
-   // Your code here
-   
-   vector<Node*>v;
-   Node* curr=root;
-   
-   while(curr!=NULL){
-       v.push_back(curr);
-       Node* temp=curr;
-       
-       if(temp->bottom!=NULL){
-           temp=temp->bottom;
-           while(temp!=NULL){
-               v.push_back(temp);
-               temp=temp->bottom;
-           }
-       }
-       
-       curr=curr->next;
-   }
-   
-   sort(v.begin(), v.end(), cmp);
-   //cout<<v.size()<<endl;
-   
-   Node *tail=NULL;
-   root=NULL;
-   
-   for(int i=0; i<v.size(); i++){
-       //Node* temp=new Node(v[i]);
-       Node* temp=v[i];
-       if(root==NULL){
-           root=temp;
-           tail=root;
-       }
-       else{
-           tail->bottom=temp;
-           tail=tail->bottom;
-       }
-   }
-   
-   tail->next=NULL;
-   return root;
+
+Node *flatten(Node *root){
+    if(root==NULL || root->next==NULL){
+        return root;
+    }
+    
+    root->next=flatten(root->next);
+    
+    root=merge(root, root->next);
+    
+    return root;
 }
 
