@@ -119,9 +119,6 @@ class Solution {
         }
         
         int t=node->data;
-        // int l=preorder(node->left);
-        // int r=preorder(node->right);
-        // node->data=l+r;
         
         node->data=preorder(node->left)+preorder(node->right);
         return t+node->data;
