@@ -93,27 +93,29 @@ struct Node {
 class Solution{
   public:
     // Return True if the given trees are isomotphic. Else return False.
-    bool ismorp(Node *root1, Node *root2)
+    bool isSame(Node *root1, Node *root2)
     {   if(root1==NULL && root2==NULL) return true;
         if((root1==NULL && root2!=NULL) || (root1!=NULL && root2==NULL)) return false;
         if(root1->data!=root2->data) return false;
         
-        return ismorp(root1->left, root2->left) && ismorp(root1->right, root2->right);
+        return isSame(root1->left, root2->left) && isSame(root1->right, root2->right);
         
     }
-    bool afterFlip(Node *root1, Node *root2){
+    
+    bool onFlip(Node *root1, Node *root2){
         if(root1==NULL && root2==NULL) return true;
         if((root1==NULL && root2!=NULL) || (root1!=NULL && root2==NULL)) return false;
         if(root1->data!=root2->data) return false;
         
-        return afterFlip(root1->left, root2->right) && afterFlip(root1->right, root2->left);
+        return onFlip(root1->left, root2->right) && onFlip(root1->right, root2->left);
     }
+    
     bool isIsomorphic(Node *root1, Node *root2)
     {   if(root1==NULL && root2==NULL) return true;
         
-        if(ismorp(root1, root2)) return true;
+        if(isSame(root1, root2)) return true;
         else{
-            return afterFlip(root1, root2);
+            return onFlip(root1, root2);
         }
         
         
