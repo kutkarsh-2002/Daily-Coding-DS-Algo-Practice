@@ -18,32 +18,52 @@ public:
         
         queue<TreeNode*>q;
         q.push(root);
-        int res=(root->left==NULL)?root->right->val:root->val;
-        bool flag=false;
+        //int res=(root->left==NULL)?root->right->val:root->val;
+//         bool flag=false;
+        
+//         while(!q.empty()){
+//             for(int i=q.size()-1, flag=false; i>=0; i--){
+//                 TreeNode* curr=q.front();
+//                 q.pop();
+                
+//                 if(curr->left!=NULL && flag==false){
+//                     res=curr->left->val;
+//                     q.push(curr->left);
+//                     flag=true;
+//                 }
+//                 else if(curr->left!=NULL){
+//                     q.push(curr->left);
+//                 }
+                
+//                 if(curr->right!=NULL && curr->left==NULL && flag==false){
+//                     res=curr->right->val;
+//                     q.push(curr->right);
+//                     flag=true;
+//                 }
+//                 else if(curr->right!=NULL){
+//                     q.push(curr->right);
+//                 }
+                
+//             }
+//         }
+        
+        int res=root->val;;
         
         while(!q.empty()){
-            for(int i=q.size()-1, flag=false; i>=0; i--){
+            int size=q.size();
+            
+            for(int i=0; i<size; i++){
                 TreeNode* curr=q.front();
                 q.pop();
-                
-                if(curr->left!=NULL && flag==false){
-                    res=curr->left->val;
-                    q.push(curr->left);
-                    flag=true;
-                }
-                else if(curr->left!=NULL){
-                    q.push(curr->left);
-                }
-                
-                if(curr->right!=NULL && curr->left==NULL && flag==false){
-                    res=curr->right->val;
-                    q.push(curr->right);
-                    flag=true;
-                }
-                else if(curr->right!=NULL){
+                res=curr->val;
+                //cout<<res<<endl;
+                if(curr->right!=NULL){
                     q.push(curr->right);
                 }
                 
+                if(curr->left!=NULL){
+                    q.push(curr->left);
+                }
             }
         }
         
