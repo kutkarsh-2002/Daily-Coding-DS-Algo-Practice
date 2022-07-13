@@ -110,7 +110,7 @@ class Solution
         pair<bool, int>r=check(root->right);
         
         if((root->data!=l.second+r.second) || l.first==false || r.first==false){
-            return {false, l.second+r.second};
+            return {false, root->data+l.second+r.second};
         }else{
             return {true, root->data+l.second+r.second};
         }
