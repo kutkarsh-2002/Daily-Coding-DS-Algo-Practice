@@ -31,9 +31,9 @@
 </span></pre>
 
 <p><span style="font-size:18px"><strong>Your Task:</strong><br>
-You just have to <strong>complete </strong>the function <strong>leftView() </strong>that prints the left view. The newline is automatically appended by the driver code.</span><br>
+You just have to <strong>complete </strong>the function <strong>leftView() </strong>that returns an array containing the nodes that are in&nbsp;the left view. The newline is automatically appended by the driver code.</span><br>
 <span style="font-size:18px"><strong>Expected Time Complexity:&nbsp;</strong>O(N).<br>
-<strong>Expected Auxiliary Space:&nbsp;</strong>O(Height of the Tree).</span></p>
+<strong>Expected Auxiliary Space:&nbsp;</strong>O(N).</span></p>
 
 <p><span style="font-size:18px"><strong>Constraints:</strong><br>
 0 &lt;= Number of nodes &lt;= 100<br>
