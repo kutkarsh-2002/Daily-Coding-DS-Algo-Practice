@@ -104,6 +104,7 @@ class Solution
     public:
     //Function to return a list of nodes visible from the top view 
     //from left to right in Binary Tree.
+    
     vector<int> topView(Node *root)
     {
         //Your code here
@@ -116,32 +117,29 @@ class Solution
         q.push({root, 0});
         
         while(!q.empty()){
-            auto p=q.front();
+            pair<Node*, int> curr=q.front();
             q.pop();
-            Node* curr=p.first;
-            int l=p.second;
             
             if(mp.empty()){
-                mp[l]=curr->data;
-            }
-            else if(mp.find(l)==mp.end()){
-                mp[l]=curr->data;
-            }
-            
-            if(curr->left!=NULL){
-                q.push({curr->left, l-1});
+                mp[curr.second]=curr.first->data;
+            }else if(mp.find(curr.second)==mp.end()){
+                mp[curr.second]=curr.first->data;
             }
             
-            if(curr->right!=NULL){
-                q.push({curr->right, l+1});
+            if(curr.first->left!=NULL){
+                q.push({curr.first->left, curr.second-1});
+            }
+            
+            if(curr.first->right!=NULL){
+                q.push({curr.first->right, curr.second+1});
             }
         }
-        
         for(auto x: mp){
             v.push_back(x.second);
         }
         
         return v;
+        
     }
 
 };
