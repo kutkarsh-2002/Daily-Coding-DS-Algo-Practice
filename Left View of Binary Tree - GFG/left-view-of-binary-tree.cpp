@@ -127,22 +127,22 @@ struct Node
  */
 
 //Function to return a list containing elements of left view of the binary tree.
-
-void leftView(Node* root, vector<int>&v, int &maxlevel, int level){
-    if(root==NULL){
-        return ;
-    }
+void lview(Node* root, int &maxlevel, int level, vector<int>&v){
+    if(!root) return ;
+    
     if(maxlevel<level){
         v.push_back(root->data);
         maxlevel=level;
+    
     }
-    leftView(root->left, v, maxlevel, level+1);
-    leftView(root->right, v, maxlevel, level+1);
+    
+    lview(root->left, maxlevel, level+1, v);
+    lview(root->right, maxlevel, level+1, v);
 }
 vector<int> leftView(Node *root)
-{   
-    vector<int>v;
-    int maxlevel=0;
-    leftView(root, v, maxlevel, 1);
-    return v;
+{
+   vector<int>v;
+   int maxlevel=0;
+   lview(root, maxlevel, 1, v);
+   return v;
 }
