@@ -2,7 +2,7 @@ class Solution {
 public:
     void findingPermut(vector<int>&nums, vector<vector<int>>&res, int i){
         
-        if(i>=nums.size()){
+        if(i==nums.size()){
             res.push_back(nums);
             return;
         }
