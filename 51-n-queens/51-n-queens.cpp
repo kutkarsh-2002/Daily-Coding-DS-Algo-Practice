@@ -1,48 +1,83 @@
-// class Solution {
-// public:
-//     vector<vector<string>> solveNQueens(int n) {
-        
-//     }
-// };
-
 class Solution {
 public:
-    vector<vector<string>> ret;
-    bool is_valid(vector<string> &board, int row, int col){
-        // check col
-        for(int i=row;i>=0;--i)
-            if(board[i][col] == 'Q') return false;
-        // check left diagonal
-        for(int i=row,j=col;i>=0&&j>=0;--i,--j)
-            if(board[i][j] == 'Q') return false;
-        //check right diagonal
-        for(int i=row,j=col;i>=0&&j<board.size();--i,++j)
-            if(board[i][j] == 'Q') return false;
+    
+    /*********************************************************/
+//     To place Q at the right position and following the rules of the chess board 3 condition must be satisfied.
+    
+//     1. Every row must have Q
+//     2. Every col must have Q
+//     3. One Q should not attack other Q
+        
+//     Note: In chess board Q can attack in 8 directions.
+        
+//         lupdiag(row--, col--), llowdia(row++, col--), up(row--, col), dn(row++, col), riupdiag(row--, col++), rilowdiag(row++, col++), left(row, col--), right(row, col++);
+    
+//     But in this case just we need to check for left upper diagonal, left lower diagonal, and left side because in else direction cells will be unfilled. So we will never get Q on such cells.
+    
+    /***********************************************************/
+    
+    bool isValid(int row, int col, int n, vector<string>&board){
+        int dprow=row, dpcol=col;
+        
+        //upper diag
+        while(row>=0 && col>=0){
+            if(board[row][col]=='Q') return false;
+            row--;
+            col--;
+        }
+        
+        row=dprow, col=dpcol;
+        
+        //lower diag
+        while(row<n && col>=0){
+            if(board[row][col]=='Q') return false;
+            row++;
+            col--;
+        }
+        
+        //left row
+        col=dpcol;
+        row=dprow;
+        while(col>=0){
+            if(board[row][col]=='Q') return false;
+            col--;
+        }
+        
         return true;
     }
-    void dfs(vector<string> &board, int row){
-        // exit condition
-        if(row == board.size()){
-            ret.push_back(board);
-            return;
+    
+    void dfs(int col, int n, vector<string>&board, vector<vector<string>>&res){
+        if(col==n){
+            //if col==n i.e we have successfully placed Q at the right position
+            // so we will push board into result.
+            res.push_back(board);
+            return ;
         }
-        // iterate every possible position
-        for(int i=0;i<board.size();++i){
-            if(is_valid(board,row,i)){
-                // make decision
-                board[row][i] = 'Q';
-                // next iteration
-                dfs(board,row+1);
-                // back-tracking
-                board[row][i] = '.';
+        
+        for(int row=0; row<n; row++){
+            // for every col we will check into each row that is it posiible to place Q until we get the right pos.
+            
+            if(isValid(row, col, n, board)){
+                board[row][col]='Q';
+                dfs(col+1, n, board, res);
+                board[row][col]='.';
             }
         }
     }
+    
     vector<vector<string>> solveNQueens(int n) {
-		// return empty if n <= 0
-        if(n <= 0) return {{}};
-        vector<string> board(n,string(n,'.'));
-        dfs(board,0);
-        return ret;
+        
+        if(n==0) return {{}};
+        vector<vector<string>>res;
+        vector<string>board(n);
+        string s(n, '.');
+        
+        for(int i=0; i<n; i++){
+            board[i]=s;
+        }
+        
+        dfs(0, n, board, res);
+        return res;
     }
 };
+
