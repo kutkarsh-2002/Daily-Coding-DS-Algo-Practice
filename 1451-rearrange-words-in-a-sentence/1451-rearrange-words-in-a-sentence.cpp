@@ -1,25 +1,27 @@
 class Solution {
 public:
     string arrangeWords(string sentence) {
-        map<int,vector<string>> m;
+        map<int,vector<string>> mp;
         sentence[0] = tolower(sentence[0]);
 
         sentence.push_back(' ');
-        string str = "", ans = "";
+        string str = "", res = "";
         for(char ch : sentence){
             if(ch!=' ')str.push_back(ch);
             else{
-                m[(int)str.size()].push_back(str);
+                mp[(int)str.size()].push_back(str);
                 str = "";
             }
         }
-        for(auto x : m){
+        
+        for(auto x : mp){
             for(auto y : x.second){
-                ans+=(y+' ');                
+                res+=(y+' ');                
             }
         }
-        ans.pop_back();
-        ans[0] = toupper(ans[0]);
-        return ans;
+        
+        res.pop_back();
+        res[0] = toupper(res[0]);
+        return res;
     }
 };
